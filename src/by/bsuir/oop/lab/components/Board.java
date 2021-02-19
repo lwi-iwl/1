@@ -1,39 +1,25 @@
+package by.bsuir.oop.lab.components;
+
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import javax.swing.JPanel;
+import by.bsuir.oop.lab.shapes.SunBeam;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication1;
 
 /**
  *
  * @author nikst
  */
-import javax.swing.*;
-import java.awt.*;
+public class Board extends JPanel {
 
-public class JavaApplication1 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        JFrame jf = new JFrame("For2D");
-        Dimension sSize = Toolkit.getDefaultToolkit().getScreenSize();
-        jf.setBackground(Color.DARK_GRAY);
-        jf.setSize(sSize.height - 100, sSize.height - 100);
-        jf.setDefaultCloseOperation(jf.EXIT_ON_CLOSE);
-        jf.setVisible(true);
-        jf.add(new board());
-        jf.setResizable(false);
-        //коммент
-    }
-
-}
-
-class board extends JPanel {
-
-    private void draw1(Graphics g) {
+    private void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         int w = getWidth();
         int h = getHeight();
@@ -65,67 +51,28 @@ class board extends JPanel {
         g2d.drawOval(w * 10 / 61, w * 400 / 499, w / 100, w / 100);
 
         SunBeam SB1 = new SunBeam(0, w / 5 - w / 30, h * 4 / 5 + h / 50, g2d);
-        SB1.display();
+        SB1.display(w, h);
         SunBeam SB2 = new SunBeam(45.0, w / 5 - w / 40, h * 4 / 5 + h / 43, g2d);
-        SB2.display();
+        SB2.display(w, h);
         SunBeam SB3 = new SunBeam(95.0, w / 5 - w / 50, h * 4 / 5 + h / 33, g2d);
-        SB3.display();
+        SB3.display(w, h);
         SunBeam SB4 = new SunBeam(135.0, w / 5 - w / 40, h * 4 / 5 + h / 25, g2d);
-        SB4.display();
+        SB4.display(w, h);
         SunBeam SB5 = new SunBeam(180.0, w / 5 - w / 32, h * 4 / 5 + h / 23, g2d);
-        SB5.display();
+        SB5.display(w, h);
         SunBeam SB6 = new SunBeam(225.0, w / 5 - w / 25, h * 4 / 5 + h / 23, g2d);
-        SB6.display();
+        SB6.display(w, h);
         SunBeam SB7 = new SunBeam(275.0, w / 5 - w / 23, h * 4 / 5 + h / 31, g2d);
-        SB7.display();
+        SB7.display(w, h);
         SunBeam SB8 = new SunBeam(315.0, w / 5 - w / 25, h * 4 / 5 + h / 43, g2d);
-        SB8.display();
+        SB8.display(w, h);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
-        draw1(g);
+        draw(g);
     }
 
-    class SunBeam {
-
-        double angle;
-        int baseX1;
-        int baseY1;
-        int baseX2;
-        int baseY2;
-        int baseX3;
-        int baseY3;
-        Graphics2D g2;
-
-        SunBeam(double a, int bx1, int by1, Graphics2D g2d) {
-            angle = Math.toRadians(a);
-            baseX1 = bx1;
-            baseY1 = by1;
-            g2 = g2d;
-        }
-
-        void display() {
-            int w = getWidth();
-            int h = getHeight();
-            float fw = w;
-            float fh = h;
-            float fbx1 = baseX1;
-            float fby1 = baseY1;
-            g2.setStroke(new BasicStroke(3.0f));
-            double s = Math.sin(angle);
-            double c = Math.cos(angle);
-            float fs = (float) s;
-            float fc = (float) c;
-            baseX2 = Math.round(fc * fw / 400 + fbx1);
-            baseY2 = Math.round(fs * fw / 400 + fby1);
-            baseX3 = Math.round(fs * fw / 50 + fc * fw / 800 + fbx1);
-            baseY3 = Math.round(-fc * fw / 50 - fs * fw / 800 + fby1);
-            int x3[] = {baseX1, baseX2, baseX3, baseX1};
-            int y3[] = {baseY1, baseY2, baseY3, baseY1};
-            int numberofpoints = 4;
-            g2.drawPolygon(x3, y3, numberofpoints);
-        }
-    }
+    
 }
